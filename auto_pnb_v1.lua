@@ -48,7 +48,7 @@ AddHook("onsendpacket", "sp", function(tipe, roki)
     if roki:find("/setup") then 
         SendVariantList({[0] = "OnDialogRequest", [1] = [[
 set_default_color|`w
-add_label_with_icon|small|`cPNB V1 NO GAUT|left|1438|
+add_label_with_icon|small|`cPNB V1 GAUT|left|1438|
 add_label_with_icon|small|`9Script by RockyBandel|left|2480|
 add_spacer|small|
 add_label_with_icon|small|`c1./pos `0- `5Set position (can more than 1)|left|340|
