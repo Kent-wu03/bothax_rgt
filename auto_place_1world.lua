@@ -1,10 +1,17 @@
-ids = 4584
+ids = 996
 delay = 100
 
 -- do not touch
 sizex = 100
 sizey = 60
-LogToConsole("Make by rockybandel")
+
+function inv(id)
+    for _, item in pairs(GetInventory()) do
+        if item.id == id then return item.amount end
+    end
+    return 0
+end
+
 function placeb(x,y)
 pkt = {}
 pkt.type = 3
@@ -23,13 +30,33 @@ end
 
 Sleep(1000)
 
-for y = sizey % 1, sizey, 1 do
+for y = 0, sizey do
     for x = 0, sizex do
         local tiles = GetTile(x, y)
+
+        if inv(ids) == 0 then
+            local found = false
+            for _, obj in pairs(GetObjectList()) do
+                if obj.id == ids then
+                    local itemx = math.floor(obj.pos.x / 32)
+                    local itemy = math.floor(obj.pos.y / 32)
+                    LogToConsole("`9Take block at X:`c" .. itemx .. " `9Y:`c" .. itemy)
+                    FindPath(itemx, itemy, 500)
+                    Sleep(500)
+                    found = true
+                    break
+                end
+            end
+            if not found then
+                LogToConsole("`4No block")
+                Sleep(1000)
+            end
+        end
+
         if tiles.fg == 0 then
-			FindPath(x, y)
+            FindPath(x, y)
             Sleep(delay)
-            placeb(x, y)
+            placeb(x, y) -- fixed case
             Sleep(delay)
         end
     end
