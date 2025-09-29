@@ -1,4 +1,4 @@
-ids = 996
+ids = 54
 delay = 100
 
 -- do not touch
@@ -53,10 +53,10 @@ for y = 0, sizey do
             end
         end
 
-        if tiles.fg == 0 then
-            FindPath(x, y)
+        if tiles and tiles.fg == 0 and inv(ids) > 0 then
+            FindPath(x, y,500)
             Sleep(delay)
-            placeb(x, y) -- fixed case
+            placeb(x, y)
             Sleep(delay)
         end
     end
